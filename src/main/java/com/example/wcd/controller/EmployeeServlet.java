@@ -41,9 +41,8 @@ public class EmployeeServlet extends HttpServlet {
                 case "/insert":
                     insertEmployee(request, response);
                     break;
-
                 default:
-                    listUser(request, response);
+                    listEmployee(request, response);
                     break;
             }
         } catch (SQLException ex) {
@@ -51,11 +50,11 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 
-    private void listUser(HttpServletRequest request, HttpServletResponse response)
+    private void listEmployee(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         List<Employee> listEmployee = employDAO.selectAllUsers();
         request.setAttribute("listEmployee", listEmployee);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("List.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
         dispatcher.forward(request, response);
     }
     private void insertEmployee(HttpServletRequest request, HttpServletResponse response)
@@ -65,7 +64,7 @@ public class EmployeeServlet extends HttpServlet {
         String address = request.getParameter("address");
         String position = request.getParameter("position");
         String department = request.getParameter("department");
-        Employee newEmployee = new Employee( name, birthday, address, position, department);
+        Employee newEmployee = new Employee(name, birthday, address, position, department);
         employDAO.insertEmployee(newEmployee);
         response.sendRedirect("list");
     }
@@ -75,4 +74,6 @@ public class EmployeeServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("employee.jsp");
         dispatcher.forward(request, response);
     }
+
+
 }
