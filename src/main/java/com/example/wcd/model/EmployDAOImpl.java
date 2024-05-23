@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployDAOImpl implements EmployDAO{
-        private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO Employee (id, name, birthday, address, position, department) VALUES (?, ?, ?, ?, ?, ?)";
+        private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO Employee ( name, birthday, address, position, department) VALUES ( ?, ?, ?, ?, ?)";
         private static final String SELECT_ALL_EMPLOYEE = "SELECT * FROM Employee";
 
     @Override
@@ -28,8 +28,26 @@ public class EmployDAOImpl implements EmployDAO{
         }
     }
 
+
+
     @Override
-    public List<Employee> selectAllUsers() {
+    public List<Employee> selectAllEmployees() {
+//        List<Employee> employees = new ArrayList<>();
+//        try (Connection connection = MyConnection.getMySQLConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_EMPLOYEE)) {
+//            ResultSet rs = preparedStatement.executeQuery();
+//            while (rs.next()) {
+//                int id = rs.getInt("id");
+//                String name = rs.getString("name");
+//                String birthday = rs.getString("birthday");
+//                String address = rs.getString("address");
+//                String position = rs.getString("position");
+//                String department = rs.getString("department");
+//                employees.add(new Employee(name, birthday, address,position, department ));
+//            }
+//        } catch (SQLException e) {
+//            printSQLException(e);
+//        }
         List<Employee> employees = new ArrayList<>();
         try (Connection connection = MyConnection.getMySQLConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_EMPLOYEE)) {
@@ -41,7 +59,7 @@ public class EmployDAOImpl implements EmployDAO{
                 String address = rs.getString("address");
                 String position = rs.getString("position");
                 String department = rs.getString("department");
-                employees.add(new Employee(name, birthday, address,position, department ));
+                employees.add(new Employee(name, birthday, address, position, department));
             }
         } catch (SQLException e) {
             printSQLException(e);

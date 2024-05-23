@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EmployDAO {
     void insertEmployee(Employee employee) throws SQLException;
-    List<Employee> selectAllUsers();
+    List<Employee> selectAllEmployees();
 }

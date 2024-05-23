@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/employee", "/new", "/insert","/list"})
@@ -52,8 +53,8 @@ public class EmployeeServlet extends HttpServlet {
 
     private void listEmployee(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Employee> listEmployee = employDAO.selectAllUsers();
-        request.setAttribute("listEmployee", listEmployee);
+        List<Employee> listEmployee = employDAO.selectAllEmployees();
+        request.setAttribute("listEmployee", listEmployee); // Đặt biến listEmployee vào phạm vi yêu cầu
         RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
         dispatcher.forward(request, response);
     }
